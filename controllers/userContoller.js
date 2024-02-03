@@ -12,7 +12,7 @@ exports.registerController = async (req, res) => {
     const { username, email, password } = req.body;
     // Validation
     if (!username || !email || !password) {
-      return res.status(400).send({
+      return res.send({
         success: false,
         message: "Please fill in all fields",
       });
@@ -20,7 +20,7 @@ exports.registerController = async (req, res) => {
     // Existing user
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(401).send({
+      return res.send({
         success: false,
         message: "User already exists",
       });
@@ -35,7 +35,7 @@ exports.registerController = async (req, res) => {
       
     });
     await user.save();
-    return res.status(201).send({
+    return res.send({
       success: true,
       message: "New User Created",
       user,
@@ -76,7 +76,7 @@ exports.loginController = async (req, res) => {
     const { email, password } = req.body;
     // Validation
     if (!email || !password) {
-      return res.status(401).send({
+      return res.send({
         success: false,
         message: "Please provide email and password",
       });
@@ -92,9 +92,9 @@ exports.loginController = async (req, res) => {
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).send({
+      return res.send({
         success: false,
-        message: "Invalid email or password",
+        message: "Invalid Password",
       });
     }
 

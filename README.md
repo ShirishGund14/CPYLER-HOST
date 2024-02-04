@@ -2,7 +2,7 @@
 ### Live link : https://cpyler.onrender.com
 CPYLER is a online code compiler which can run C,C++ and Python codes ,it is full stack project which is made by using techstack  ReactJs for the frontend and Material UI  and  Nodejs and expressJs for the backend and MongoDb for the database 
 ### Features
-+ Secure Authetication 
++ Secure authentication
 + Runs C++,C,Python codes
 + Copy code on clipboard
 +  Download the code file

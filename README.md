@@ -16,47 +16,51 @@ CPYLER is a online code compiler which can run C,C++ and Python codes ,it is ful
 
 
 Authentication
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/218efeba-71a0-48b1-9757-09deb72481cd)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/d3b0ff32-ba97-4ffb-9ce7-ac7a8ad41d9b)
 
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/b11da886-6740-475e-81ee-d5b3e355f126)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/800ece33-73a1-4768-adb3-0e6424a82f12)
 
 
 
 
 Home page
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/968b1215-d847-4e58-91df-c5b2dbdb3772)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/b17b7484-bd22-4315-99bf-77a8f0fd706c)
 
+Compiler
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/893e1823-af35-4498-a165-5ff46945cfae)
 
-
-With Dark-Mode
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/197f0b90-7c7f-4432-9983-89c16db28f3a)
 
 
 Save code
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/50bc3e11-19b5-47f1-ba66-1c2b10a3184d)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/e03f9ced-72d6-4d27-a354-521aa9417e56)
+
 
 
 All user saved codes : 
 
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/7ddd1200-08b2-482a-92e1-29bc4342d5a5)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/d7aedf2d-095c-4761-81ef-6b1b7a9aad92)
 
-View Code
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/b8393ab1-7489-4826-a458-0f26b5c41063)
+
+
 
 User Dashboard
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/f22a3d75-e946-4b14-8ede-53d62edb8484)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/d670722d-431f-43b6-9ecf-79e0274758c1)
+
 
 Mobile Responsive
 
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/050193ca-d8b3-4d33-adf4-d347c15ea7c9)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/3ec468d1-b443-4a7a-90c4-8b0eed3ace60)
 
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/f893908c-f8ca-416e-8aa7-d9ab3eed16fc)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/c955fb42-19aa-4703-bf83-56b583c228f6)
 
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/a321cb63-a632-4b6c-b953-e6c25a67c315)
 
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/b98f6923-6ff0-478d-af23-0a2e47e6f662)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/4909bc06-2b28-4a50-b0f5-f2fdb90604ac)
+
 
 Dashboard
-![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/96b03711-285a-483b-ae11-d237eb4d80e7)
+![image](https://github.com/ShirishGund14/CPYLER-HOST/assets/112975178/a3d03e8c-6603-45f5-91e8-6638cae132fa)
+
 
 
 

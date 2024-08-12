@@ -9,11 +9,13 @@ if (!fs.existsSync(outputPath)) {
 }
 
 const executeC = (filepath, userInput) => {
-  const jobId = path.basename(filepath).split(".")[0];
-  const outPath = path.join(outputPath, jobId);
+  const jobId = path.basename(filepath).split(".")[0];  //1255454.cpp
+  const outPath = path.join(outputPath, `${jobId}.exe`); 
 
   return new Promise((resolve, reject) => {
-    const command = `gcc ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}`;
+
+    const command = `gcc ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}`; //linux
+   // const command = `gcc ${filepath} -o ${outPath} && cd ${outputPath} && ${jobId}.exe`;
 
     const childProcess = exec(command, (error, stdout, stderr) => {
       if (error) {

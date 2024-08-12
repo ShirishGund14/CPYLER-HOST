@@ -10,9 +10,13 @@ if(!fs.existsSync(dirCodes)){
 }
 
 const generateFile=async(format,content)=>{
-   const jobId=uuid();
-   const filename=`${jobId}.${format}`
+   const jobId=uuid(); 
+   const filename=`${jobId}.${format}` //11551.cpp
+
    const filepath=path.join(dirCodes,filename);
+
+   console.log('generated filename',filename);
+   console.log('generated filepath',filepath);
    await  fs.writeFileSync(filepath,content);
    return filepath;
 };

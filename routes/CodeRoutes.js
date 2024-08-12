@@ -6,31 +6,33 @@ const {
   getCodeByIdController,
   deleteCodeController,
   userCodeController,
+  RunCodeController
 } = require("../controllers/codeController");
 
-//router object
+const authMiddleware = require('../middlewares/authMiddleware')
+
+
+
+
 const router = express.Router();
 
-//routes
-// GET || all codes
-// router.get("/all-codes", getAllCodesController);
 
+router.post("/run", RunCodeController);
 
+// create code
+router.post("/create-code",authMiddleware, createCodeController);
 
+// update code
+router.put("/update-code/:id",authMiddleware, updateCodeController);
 
-//POST || create code
-router.post("/create-code", createCodeController);
+//single code Details
+router.get("/get-code/:id",authMiddleware, getCodeByIdController);
 
-//PUT || update code
-router.put("/update-code/:id", updateCodeController);
+//= delete code
+router.delete("/delete-code/:id",authMiddleware, deleteCodeController);
 
-//GET || SIngle code Details
-router.get("/get-code/:id", getCodeByIdController);
-
-//DELETE || delete code
-router.delete("/delete-code/:id", deleteCodeController);
-
-router.get("/user-code/:id", userCodeController);
+// get all user codes
+router.get("/user-code/:id",authMiddleware, userCodeController);
 
 
 

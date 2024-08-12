@@ -1,66 +1,75 @@
 const mongoose = require("mongoose");
 const codeModel=require('../models/codeModel')
 const userModel = require("../models/userModel");
+const {generateFile}=require('../generateFile');
+const {executeCpp}=require("../executeCpp")
+const {executePy}=require("../executePy")
+const {executeC} =require('../excuteC')
 
 
+exports.RunCodeController=async(req,res)=>{
+  const {language="cpp",code,userInput}=req.body;
 
-// http://localhost:8080/api/v1/code/all-codes
-// exports.getAllCodesController = async (req, res) => {
-//   try {
-//     const codes = await codeModel.find({}).populate("user");
-//     if (!codes) {
-//       return res.status(200).send({
-//         success: false,
-//         message: "No saved codes Found",
-//       });
-//     }
-//     return res.status(200).send({
-//       success: true,
-//       CodeCount: codes.length,
-//       message: "All saved lists",
-//       codes,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).send({
-//       success: false,
-//       message: "Error WHile Getting codes",
-//       error,
-//     });
-//   }
-// };
+  if(code===undefined){
+      return res.status(400).json({
+          success:false,
+          error:"Empty code body!"
+      })
+  }
+  try {
+
+  //need to generate  a code file with contetnt from req
+  const filepath=await generateFile(language,code);
 
 
+  //we need to run the file and send the res
+  let output;
+  if(language==='cpp'){
+       output=await executeCpp(filepath,userInput);
+  }
+  else if(language==='c'){
+    
+    output=await executeC(filepath,userInput);
+  }
+  else {
+       output=await executePy(filepath,userInput);
+  }
+  
+  return res.json({filepath,output});
+  } catch (err) {
+      res.status(500).json({err});
+  }
+}
 
 //Create code
 // http://localhost:8080/api/v1/code/all-codes
 exports.createCodeController = async (req, res) => {
   try {
     const { title, language,description,  user } = req.body;
-    //validation
+    
     if (!title || !description || !language || !user) {
-      return res.status(400).send({
+      return res.send({
         success: false,
         message: "Please Provide All Fields",
       });
     }
     const exisitingUser = await userModel.findById(user);
-    //validaton
+    
     if (!exisitingUser) {
-      return res.status(404).send({
+      return res.send({
         success: false,
         message: "unable to find user",
       });
     }
 
-    const newCode= new codeModel({ title, language,description,user });
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    await newCode.save({ session });
-    exisitingUser.codes.push(newCode);
-    await exisitingUser.save({ session });
-    await session.commitTransaction();
+    const newCode=  new codeModel({ 
+      title, 
+      language,
+      description,
+      user });
+
     await newCode.save();
+
     return res.status(201).send({
       success: true,
       message: "Code Saved Successfully!",
@@ -68,7 +77,7 @@ exports.createCodeController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({
+    return res.send({
       success: false,
       message: "Error WHile Creting code",
       error,
@@ -93,7 +102,7 @@ exports.updateCodeController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({
+    return res.send({
       success: false,
       message: "Error WHile Updating Blog",
       error,
@@ -107,7 +116,7 @@ exports.getCodeByIdController = async (req, res) => {
     const { id } = req.params;
     const code = await codeModel.findById(id);
     if (!code) {
-      return res.status(404).send({
+      return res.send({
         success: false,
         message: "code not found with this is",
       });
@@ -119,7 +128,7 @@ exports.getCodeByIdController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({
+    return res.send({
       success: false,
       message: "error while getting single code",
       error,
@@ -131,10 +140,8 @@ exports.getCodeByIdController = async (req, res) => {
 //   http://localhost:8080/api/v1/code/delete-code/:id
 exports.deleteCodeController = async (req, res) => {
   try {
-    const code = await codeModel
-      // .findOneAndDelete(req.params.id)
-      .findByIdAndDelete(req.params.id)
-      .populate("user");
+    const code = await codeModel.findByIdAndDelete(req.params.id).populate("user");
+    // console.log('codeid',code)
     await code.user.codes.pull(code);
     await code.user.save();
     return res.status(200).send({
@@ -143,7 +150,7 @@ exports.deleteCodeController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({
+    return res.send({
       success: false,
       message: "Erorr WHile Deleteing Code",
       error,
@@ -154,10 +161,13 @@ exports.deleteCodeController = async (req, res) => {
 //GET All USER code
 exports.userCodeController = async (req, res) => {
   try {
-    const userCode = await userModel.findById(req.params.id).populate("codes");
+    //const userCode = await userModel.findById(req.params.id).populate("codes");
+   // console.log('usercodes',userCode)
+   const exisitingUser=await userModel.findById(req.params.id)
+   const allcodes=await codeModel.find({user:req.params.id});
 
-    if (!userCode) {
-      return res.status(404).send({
+    if (!exisitingUser) {
+      return res.send({
         success: false,
         message: "codes not found with this id",
       });
@@ -165,11 +175,11 @@ exports.userCodeController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "All user-saved codes Fetched Successfully",
-      userCode,
+      allcodes,
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({
+    return res.send({
       success: false,
       message: "error in user code",
       error,

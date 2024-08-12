@@ -17,7 +17,7 @@ exports.registerController = async (req, res) => {
         message: "Please fill in all fields",
       });
     }
-    // Existing user
+   
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.send({
@@ -27,7 +27,7 @@ exports.registerController = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Save new user
+   
     const user = new userModel({
        username, 
       email, 
@@ -131,14 +131,14 @@ exports.userDashboardController = async (req, res) => {
       { $group: { _id: "$language", count: { $sum: 1 } } },
     ]);
 
-    // Format the data for PieChart
+    
     const pieChartData = codeCounts.map((entry, index) => ({
       id: index,
       value: entry.count,
       label: entry._id,
     }));
 
-    // Send a clean JSON response without circular references
+   
     res.status(200).json({
       success: true,
       message: "User dashboard data",
@@ -148,11 +148,11 @@ exports.userDashboardController = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    // Handle errors properly
+   
     res.status(500).json({
       success: false,
       message: "Error in User Dashboard Controller",
-      error: error.message, // Send only the error message to avoid circular references
+      error: error.message,
     });
   }
 };
@@ -162,9 +162,9 @@ exports.userInfoController = async (req, res) => {
   try {
     const userId = req.params.id;
     const user=await userModel.findById(userId);
-    console.log('userid',userId)
+    // console.log('userid',userId)
 
-    // Send a clean JSON response without circular references
+    
     res.status(200).json({
       success: true,
       message: "User  data",
@@ -173,14 +173,27 @@ exports.userInfoController = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    // Handle errors properly
+  
     res.status(500).json({
       success: false,
       message: "Error in User info Controller",
-      error: error.message, // Send only the error message to avoid circular references
+      error: error.message, 
     });
   }
 };
 
 
-// ... Other controller functions ...
+exports.testController=async(req,res)=>{
+  try {
+   res.send({
+    message:'end point ',
+    success:true
+   })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error in User test Controller",
+      error: error.message, 
+    });
+  }
+}

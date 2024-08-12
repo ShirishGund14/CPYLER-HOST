@@ -4,11 +4,12 @@ const {
   registerController,
   loginController,
   userDashboardController,
-  userInfoController
+  userInfoController,
+  testController
 } = require("../controllers/userContoller");
 
 
-
+const authMiddleware= require('../middlewares/authMiddleware')
 
 
 
@@ -16,6 +17,8 @@ const {
 
 //router object
 const router = express.Router();
+
+router.get("/test",authMiddleware, testController);
 
 // GET ALL USERS || GET
 router.get("/all-users", getAllUsers);

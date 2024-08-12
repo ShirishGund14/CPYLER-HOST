@@ -1,25 +1,27 @@
 const jwt = require('jsonwebtoken');
 
-
 module.exports = function (req, res, next) {
     try {
-        //get token from header
-    
-        // const token = req.header('authorization').replace("Bearer ","");
-        const token = req.header('authorization')?.replace("Bearer ", "");
-
         
-        //   //save token to localStorage
-        // localStorage.setItem('token', token);
+        const token = req.headers.authorization?.replace("Bearer ", "");
 
-        const decryptedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized: Token not provided"
+            });
+        }
+
+        // Verify token
+        const decryptedToken = jwt.verify(token, process.env.JWT_SECRET);
         req.body.userId = decryptedToken.userId;
         next();
 
     } catch (error) {
-        res.send({
+        
+        return res.status(401).json({
             success: false,
-            message: error.message,
-        })
+            message: "Unauthorized: Invalid token"
+        });
     }
 }

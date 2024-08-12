@@ -21,7 +21,8 @@ const executeCpp = (filepath,userInput) => {
   console.log('execute outputpath',outPath);
 
   return new Promise((resolve, reject) => {
-    const command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ${jobId}.exe`;
+    const command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}`; //linux
+   // const command = `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ${jobId}.exe`;
 
     console.log('final command',command)
 

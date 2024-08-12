@@ -20,8 +20,6 @@ const userSchema = new mongoose.Schema(
         ref: "Code",
       },
     ],
-    
-
   },
   { timestamps: true }
 );
